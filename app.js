@@ -20,29 +20,34 @@ const gameBoard = (() => {
     }
 
     // Check for Winner
-    const checkWin = (currentBoard) => {
-        // check rows
-        if (currentBoard[0,0] === currentBoard[0,1] && currentBoard[0,0] === currentBoard[0,2]) {
+    const checkWin = () => {
+        if (currentBoard[0][0] !== "" && currentBoard[0][0] === currentBoard[0][1] && currentBoard[0][0] === currentBoard[0][2]) {
+            console.log('first cond')
             return true
-        } else if (currentBoard[0,3] === currentBoard[0,4] && currentBoard[0,3] === currentBoard[0,5]) {
+        } else if (currentBoard[0][3] !== "" && currentBoard[0][3] === currentBoard[0][4] && currentBoard[0][3] === currentBoard[0][5]) {
+            console.log('second cond')
             return true
-        } else if (currentBoard[0,6] === currentBoard[0,7] && currentBoard[0,6] === currentBoard[0,8])
+        } else if (currentBoard[0][6] !== "" && currentBoard[0][6] === currentBoard[0][7] && currentBoard[0][6] === currentBoard[0][8]) {
+            console.log('third cond')
+            return true
+           }
+           else {
+            return false
+           }
     }
 
     // Update game logic
     const updateBoard = (choice) => {
         if (playerTurn === 0) {
-            if(currentBoard[0, choice].length === 0) {
+            if(!currentBoard[0][choice]) {
                 updateHeader()
-                currentBoard[0, choice] = "X"
-                checkWin(playerTurn)
+                currentBoard[0][choice] = "X"
                 playerTurn = 1
             }
         } else {
-            if(currentBoard[0, choice].length === 0) {
+            if(!currentBoard[0][choice]) {
                 updateHeader()
-                currentBoard[0, choice] = "O"
-                checkWin(playerTurn)
+                currentBoard[0][choice] = "O"
                 playerTurn = 0
             }
         }
@@ -52,6 +57,9 @@ const gameBoard = (() => {
     const updateHeader = () => {
         let playerHeader = document.getElementById('player-turn')
         playerTurn === 1 ? playerHeader.textContent = "Player 1" : playerHeader.textContent = "Player 2"
+        if(checkWin()) {
+            playerTurn === 1 ? playerHeader.textContent = "Player 1 Wins" : playerHeader.textContent = "Player 2 Wins"
+        }
     }
 
     gridCells = []

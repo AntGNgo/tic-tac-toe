@@ -21,9 +21,21 @@ const gameBoard = (() => {
 
     // Check for Winner
     const checkWin = () => {
-        if (currentBoard[0][0] + currentBoard[0][1] + currentBoard[0][2] === 'XXX' || currentBoard[0][0] + currentBoard[0][1] + currentBoard[0][2] === 'OOO') {
+        // Check Rows
+        if (currentBoard[0][0] + currentBoard[0][1] + currentBoard[0][2] === 'XXX' || currentBoard[0][0] + currentBoard[0][1] + currentBoard[0][2] === 'OOO' || currentBoard[0][3] + currentBoard[0][4] + currentBoard[0][5] === 'XXX' || currentBoard[0][3] + currentBoard[0][4] + currentBoard[0][5] === 'OOO' || currentBoard[0][6] + currentBoard[0][7] + currentBoard[0][8] === 'XXX' || currentBoard[0][6] + currentBoard[0][7] + currentBoard[0][8] === 'OOO') {
             return true
-        } 
+        }
+        
+        // Check Columns
+        if (currentBoard[0][0] + currentBoard[0][3] + currentBoard[0][6] === 'XXX' || currentBoard[0][0] + currentBoard[0][3] + currentBoard[0][6] === 'OOO') {
+            return true
+        } else if (currentBoard[0][1] + currentBoard[0][4] + currentBoard[0][7] === 'XXX' || currentBoard[0][1] + currentBoard[0][4] + currentBoard[0][7] === 'OOO') {
+            return true
+        } else if (currentBoard[0][2] + currentBoard[0][5] + currentBoard[0][8] === 'XXX' || currentBoard[0][2] + currentBoard[0][5] + currentBoard[0][8] === 'OOO') {
+            return true
+        }
+
+        // Check Diagonals
     }
 
     // Update game logic
@@ -61,7 +73,6 @@ const gameBoard = (() => {
     gridCells.forEach(cell => {
         cell.addEventListener('click', () => {
             if(cell.textContent === "") {
-                console.log(cell.getAttribute('id'))
                 updateBoard(cell.getAttribute('id'))
                 playerTurn === 0 ? cell.textContent = "O" : cell.textContent = "X"
             }

@@ -1,0 +1,30 @@
+.gameboard {
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    grid-template-rows: repeat(3, 200px);
+}
+
+.game-cell {
+    width: 200px;
+    height: 200px;
+}
+
+.top {
+    border-top: 1px solid black;
+}
+
+.left {
+    border-left: 1px solid black;
+}
+
+.right {
+    border-right: 1px solid black;
+}
+
+.bottom {
+    border-bottom: 1px solid black;
+}
+
+.all {
+    border: 1px solid black
+}

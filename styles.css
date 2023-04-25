@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: repeat(3, 200px);
     grid-template-rows: repeat(3, 200px);
+    place-content: center;
 }
 
 .game-cell {

@@ -79,4 +79,12 @@ const gameBoard = (() => {
         }) 
     });
 
+    const newGame = document.getElementById('new-game')
+    newGame.addEventListener('click', () => {
+        resetGame()
+        gridCells.forEach(cell => {
+            cell.textContent = ""
+        })
+    })
+
 })()

@@ -21,33 +21,23 @@ const gameBoard = (() => {
 
     // Check for Winner
     const checkWin = () => {
-        if (currentBoard[0][0] !== "" && currentBoard[0][0] === currentBoard[0][1] && currentBoard[0][0] === currentBoard[0][2]) {
-            console.log('first cond')
+        if (currentBoard[0][0] + currentBoard[0][1] + currentBoard[0][2] === 'XXX' || currentBoard[0][0] + currentBoard[0][1] + currentBoard[0][2] === 'OOO') {
             return true
-        } else if (currentBoard[0][3] !== "" && currentBoard[0][3] === currentBoard[0][4] && currentBoard[0][3] === currentBoard[0][5]) {
-            console.log('second cond')
-            return true
-        } else if (currentBoard[0][6] !== "" && currentBoard[0][6] === currentBoard[0][7] && currentBoard[0][6] === currentBoard[0][8]) {
-            console.log('third cond')
-            return true
-           }
-           else {
-            return false
-           }
+        } 
     }
 
     // Update game logic
     const updateBoard = (choice) => {
         if (playerTurn === 0) {
             if(!currentBoard[0][choice]) {
-                updateHeader()
                 currentBoard[0][choice] = "X"
+                updateHeader()
                 playerTurn = 1
             }
         } else {
             if(!currentBoard[0][choice]) {
-                updateHeader()
                 currentBoard[0][choice] = "O"
+                updateHeader()
                 playerTurn = 0
             }
         }
@@ -58,7 +48,7 @@ const gameBoard = (() => {
         let playerHeader = document.getElementById('player-turn')
         playerTurn === 1 ? playerHeader.textContent = "Player 1" : playerHeader.textContent = "Player 2"
         if(checkWin()) {
-            playerTurn === 1 ? playerHeader.textContent = "Player 1 Wins" : playerHeader.textContent = "Player 2 Wins"
+            playerTurn === 0 ? playerHeader.textContent = "Player 1 Wins" : playerHeader.textContent = "Player 2 Wins"
         }
     }
 

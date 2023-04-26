@@ -21,7 +21,9 @@ const gameBoard = (() => {
     winWindow.classList.add("hidden");
 
     // Reset the board Array
-    currentBoard = newBoard.slice();
+    console.log(currentBoard);
+    currentBoard = structuredClone(newBoard);
+    console.log(currentBoard);
 
     // Reset Grid Cell text content
     gridCells.forEach((cell) => {
@@ -88,13 +90,13 @@ const gameBoard = (() => {
     if (playerTurn === 0) {
       if (!currentBoard[0][choice]) {
         currentBoard[0][choice] = "X";
-        updateHeader();
+        gameStatus();
         playerTurn = 1;
       }
     } else {
       if (!currentBoard[0][choice]) {
         currentBoard[0][choice] = "O";
-        updateHeader();
+        gameStatus();
         playerTurn = 0;
       }
     }
@@ -117,7 +119,7 @@ const gameBoard = (() => {
           gameCells[i].style.pointerEvents = "none";
         }
       } else {
-        winner.textContent = "Player 2 WINS";
+        winner.textContent = "Player 2 Wins";
         winWindow.classList.remove("hidden");
         for (let i = 0; i < gameCells.length; i++) {
           gameCells[i].style.pointerEvents = "none";

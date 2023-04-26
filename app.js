@@ -17,12 +17,17 @@ const gameBoard = (() => {
     // New Game
     const resetGame = () => {
         currentBoard = newBoard.slice();
+        updateHeader()
     }
 
     // Check for Winner
     const checkWin = () => {
         // Check Rows
         if (currentBoard[0][0] + currentBoard[0][1] + currentBoard[0][2] === 'XXX' || currentBoard[0][0] + currentBoard[0][1] + currentBoard[0][2] === 'OOO' || currentBoard[0][3] + currentBoard[0][4] + currentBoard[0][5] === 'XXX' || currentBoard[0][3] + currentBoard[0][4] + currentBoard[0][5] === 'OOO' || currentBoard[0][6] + currentBoard[0][7] + currentBoard[0][8] === 'XXX' || currentBoard[0][6] + currentBoard[0][7] + currentBoard[0][8] === 'OOO') {
+            gridCells.forEach(cell => {
+                console.log('removing')
+                cell.removeEventListener('click', event)
+            });
             return true
         }
         
@@ -36,6 +41,11 @@ const gameBoard = (() => {
         }
 
         // Check Diagonals
+        if (currentBoard[0][0] + currentBoard[0][4] + currentBoard[0][8] === 'XXX' || currentBoard[0][0] + currentBoard[0][4] + currentBoard[0][8] === 'OOO') {
+            return true
+        } else if (currentBoard[0][2] + currentBoard[0][4] + currentBoard[0][6] === 'XXX' || currentBoard[0][2] + currentBoard[0][4] + currentBoard[0][6] === 'OOO') {
+            return true
+        }
     }
 
     // Update game logic
@@ -58,9 +68,10 @@ const gameBoard = (() => {
     // Update DOM
     const updateHeader = () => {
         let playerHeader = document.getElementById('player-turn')
-        playerTurn === 1 ? playerHeader.textContent = "Player 1" : playerHeader.textContent = "Player 2"
         if(checkWin()) {
             playerTurn === 0 ? playerHeader.textContent = "Player 1 Wins" : playerHeader.textContent = "Player 2 Wins"
+        } else {
+            playerTurn === 0 ? playerHeader.textContent = "Player 1" : playerHeader.textContent = "Player 2"
         }
     }
 
@@ -72,11 +83,11 @@ const gameBoard = (() => {
 
     gridCells.forEach(cell => {
         cell.addEventListener('click', () => {
-            if(cell.textContent === "") {
-                updateBoard(cell.getAttribute('id'))
-                playerTurn === 0 ? cell.textContent = "O" : cell.textContent = "X"
-            }
-        }) 
+        if(cell.textContent === "") {
+            updateBoard(cell.getAttribute('id'))
+            playerTurn === 0 ? cell.textContent = "O" : cell.textContent = "X"
+        }
+        })
     });
 
     const newGame = document.getElementById('new-game')
@@ -86,5 +97,5 @@ const gameBoard = (() => {
             cell.textContent = ""
         })
     })
-
+    return {currentBoard}
 })()

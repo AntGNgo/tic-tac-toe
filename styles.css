@@ -1,56 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200&display=swap");
+
+body {
+  padding: 20px 500px;
+  background-color: #17191a;
+  font-family: "Noto Sans", sans-serif;
+}
 .gameboard {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(3, 200px);
-    grid-template-rows: repeat(3, 200px);
-    place-content: center;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 200px);
+  grid-template-rows: repeat(3, 200px);
+  place-content: center;
 }
 
 .game-win {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    padding: 10px; 
-    /* transform: translateY(-20%); */
-    box-shadow: 3px 2px 12px -4px rgba(0,0,0,0.75);
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-items: center;
-    width: 500px;
-    z-index: 1;
-    background-color: rgb(245, 240, 240);
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  padding: 20px;
+  /* transform: translateY(-20%); */
+  box-shadow: 3px 2px 12px -4px rgba(0, 0, 0, 0.75);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: center;
+  width: 500px;
+  z-index: 1;
+  background-color: #261919;
+  color: #dcdbd8;
+}
+
+.game-win button {
+  outline: none;
+  border-radius: 2px;
+  padding: 5px 15px;
+  border: 1px solid #dcdbd8;
+  background-color: #6b6b6b;
+  color: #dcdbd8;
+}
+
+.game-win button:hover {
+  transform: scale(1.01);
+}
+
+.game-win button:active {
+  transform: scale(0.98);
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
+#player-turn {
+  color: #dcdbd8;
+}
 
 .game-cell {
-    width: 200px;
-    height: 200px;
-    display: grid;
-    place-content: center;
+  width: 200px;
+  height: 200px;
+  font-size: 3rem;
+  display: grid;
+  place-content: center;
 }
 
 .top {
-    border-top: 1px solid black;
+  border-top: 2px solid #857b6d;
 }
 
 .left {
-    border-left: 1px solid black;
+  border-left: 2px solid #857b6d;
 }
 
 .right {
-    border-right: 1px solid black;
+  border-right: 2px solid #857b6d;
 }
 
 .bottom {
-    border-bottom: 1px solid black;
+  border-bottom: 2px solid #857b6d;
 }
 
 .all {
-    border: 1px solid black
+  border: 2px solid #857b6d;
 }

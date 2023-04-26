@@ -59,6 +59,7 @@ body {
 .game-cell {
   width: 200px;
   height: 200px;
+  color: #dcdbd8;
   font-size: 3rem;
   display: grid;
   place-content: center;

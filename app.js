@@ -8,25 +8,33 @@ const gameBoard = (() => {
 
   // New Game
   const resetGame = () => {
+    playerTurn = 0;
     let winWindow = document.getElementById("game-win");
     let gameCells = document.getElementsByClassName("game-cell");
 
+    // Reset pointer events
     for (let i = 0; i < gameCells.length; i++) {
       gameCells[i].style.pointerEvents = "all";
     }
+
+    // Hide the win window
     winWindow.classList.add("hidden");
+
+    // Reset the board Array
     currentBoard = newBoard.slice();
-    updateHeader();
+
+    // Reset Grid Cell text content
+    gridCells.forEach((cell) => {
+      cell.textContent = "";
+    });
+
+    gameStatus();
   };
 
   // Event listener for new game button
   const newGame = document.getElementById("new-game");
   newGame.addEventListener("click", () => {
     resetGame();
-    // Reset Grid Cell content
-    gridCells.forEach((cell) => {
-      cell.textContent = "";
-    });
   });
 
   // Check for Winner
@@ -93,7 +101,7 @@ const gameBoard = (() => {
   };
 
   // Update Turn Header and checks Win Condition for Win Window
-  const updateHeader = () => {
+  const gameStatus = () => {
     // Get Elements
     let playerHeader = document.getElementById("player-turn");
     let winWindow = document.getElementById("game-win");

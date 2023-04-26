@@ -130,16 +130,10 @@ const gameBoard = (() => {
   }
 
   gridCells.forEach((cell) => {
-    cell.addEventListener("click", function fillCell() {
+    cell.addEventListener("click", () => {
       if (cell.textContent === "") {
         updateBoard(cell.getAttribute("id"));
         playerTurn === 0 ? (cell.textContent = "O") : (cell.textContent = "X");
-      }
-      if (checkWin()) {
-        gridCells.forEach((cell) => {
-          console.log("win");
-          cell.removeEventListener("click", fillCell);
-        });
       }
     });
   });

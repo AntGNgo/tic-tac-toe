@@ -1,9 +1,32 @@
 .gameboard {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(3, 200px);
     grid-template-rows: repeat(3, 200px);
     place-content: center;
 }
+
+.game-win {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    padding: 10px; 
+    /* transform: translateY(-20%); */
+    box-shadow: 3px 2px 12px -4px rgba(0,0,0,0.75);
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-items: center;
+    width: 500px;
+    z-index: 1;
+    background-color: rgb(245, 240, 240);
+}
+
+.hidden {
+    display: none;
+}
+
 
 .game-cell {
     width: 200px;

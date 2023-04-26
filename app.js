@@ -16,6 +16,13 @@ const gameBoard = (() => {
 
     // New Game
     const resetGame = () => {
+        let winWindow = document.getElementById("game-win")
+        let gameCells = document.getElementsByClassName("game-cell")
+
+        for (let i=0; i < gameCells.length; i++) {
+            gameCells[i].style.pointerEvents = "all"
+        }
+        winWindow.classList.add('hidden')
         currentBoard = newBoard.slice();
         updateHeader()
     }
@@ -24,10 +31,6 @@ const gameBoard = (() => {
     const checkWin = () => {
         // Check Rows
         if (currentBoard[0][0] + currentBoard[0][1] + currentBoard[0][2] === 'XXX' || currentBoard[0][0] + currentBoard[0][1] + currentBoard[0][2] === 'OOO' || currentBoard[0][3] + currentBoard[0][4] + currentBoard[0][5] === 'XXX' || currentBoard[0][3] + currentBoard[0][4] + currentBoard[0][5] === 'OOO' || currentBoard[0][6] + currentBoard[0][7] + currentBoard[0][8] === 'XXX' || currentBoard[0][6] + currentBoard[0][7] + currentBoard[0][8] === 'OOO') {
-            gridCells.forEach(cell => {
-                console.log('removing')
-                cell.removeEventListener('click', event)
-            });
             return true
         }
         
@@ -68,8 +71,23 @@ const gameBoard = (() => {
     // Update DOM
     const updateHeader = () => {
         let playerHeader = document.getElementById('player-turn')
+        let winWindow = document.getElementById("game-win")
+        let winner = document.getElementById('winner')
+        let gameCells = document.getElementsByClassName("game-cell")
         if(checkWin()) {
-            playerTurn === 0 ? playerHeader.textContent = "Player 1 Wins" : playerHeader.textContent = "Player 2 Wins"
+            if(playerTurn === 0) {
+                winner.textContent = "Player 1 Wins"
+                winWindow.classList.remove('hidden')
+                for (let i=0; i < gameCells.length; i++) {
+                    gameCells[i].style.pointerEvents = "none"
+                }
+            } else {
+                winner.textContent = "Player 2 WINS"
+                winWindow.classList.remove('hidden')
+                for (let i=0; i < gameCells.length; i++) {
+                    gameCells[i].style.pointerEvents = "none"
+                }
+            }
         } else {
             playerTurn === 0 ? playerHeader.textContent = "Player 1" : playerHeader.textContent = "Player 2"
         }
@@ -81,14 +99,30 @@ const gameBoard = (() => {
         gridCells[i] = document.getElementById(i)
     }
 
+
     gridCells.forEach(cell => {
-        cell.addEventListener('click', () => {
+        cell.addEventListener('click', function fillCell() {
         if(cell.textContent === "") {
             updateBoard(cell.getAttribute('id'))
             playerTurn === 0 ? cell.textContent = "O" : cell.textContent = "X"
         }
+        if(checkWin()) {
+            gridCells.forEach(cell => {
+                console.log('win')
+                cell.removeEventListener('click', fillCell)
+            })
+        }
         })
     });
+
+    // gridCells.forEach(cell => {
+    //     cell.addEventListener('click', function fillCell() {
+    //     if(cell.textContent === "") {
+    //         updateBoard(cell.getAttribute('id'))
+    //         playerTurn === 0 ? cell.textContent = "O" : cell.textContent = "X"
+    //     }
+    //     })
+    // });
 
     const newGame = document.getElementById('new-game')
     newGame.addEventListener('click', () => {
@@ -97,5 +131,4 @@ const gameBoard = (() => {
             cell.textContent = ""
         })
     })
-    return {currentBoard}
 })()
